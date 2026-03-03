@@ -162,14 +162,17 @@ hr.passage-divider {
   margin: 1.2em 0;
 }
 
-/* Standalone choice links: dim grey, blue on hover */
+/* Standalone choice links: blue by default (works on mobile/touch) */
 p.choice a {
-  color: #555;
+  color: #06C2FE;
   text-decoration: none;
   cursor: pointer;
 }
-p.choice a:hover {
-  color: #06C2FE;
+
+/* On devices with a real hover (mouse/trackpad): start grey, turn blue on hover */
+@media (hover: hover) {
+  p.choice a { color: #555; }
+  p.choice a:hover { color: #06C2FE; }
 }
 
 /* Inline links within prose: blue always */
@@ -226,11 +229,15 @@ function handleChoice(passageName, linkText) {
     var $a = $("<a href='#'></a>").text(linkText);
     $a.on("click", function(e) {
         e.preventDefault();
-        $buf.height($buf.height());
-        $buf.find("p.choice").remove();
-        addDividerIfNeeded();
-        $buf.height("auto");
-        Engine.play(passageName);
+        /* Flash blue on the chosen link before removing */
+        $a.css("color", "#06C2FE");
+        setTimeout(function() {
+            $buf.height($buf.height());
+            $buf.find("p.choice").remove();
+            addDividerIfNeeded();
+            $buf.height("auto");
+            Engine.play(passageName);
+        }, 150);
     });
     $cp.append($a);
     $buf.append($cp);
@@ -311,11 +318,7 @@ $(document).on(":passagedisplay", function() {
 
     $buf.height("auto");
     inkyScroll(contentStartY);
-});</script><tw-passagedata pid="1" name="Arriving at the station" tags="" position="575,200" size="100,100">The train stops at a station that has eroded to little more than a long lean-to with floorboards missing.  A sign, now a flimsy ghost, might have been affixed here or there, lines suggesting something or other, but depicting nothing. 
-
-The weeded parking lot contains only one vehicle: a cab. 
-
-And Amanda, anywhere to be seen. 
+});</script><tw-passagedata pid="1" name="Arriving at the station" tags="" position="575,200" size="100,100">Nobody there. A cabbie.
 
 You should probably [[ask if he&#39;s there for you|the_cabbie]].</tw-passagedata><tw-passagedata pid="2" name="Drive on" tags="" position="575,575" size="100,100">The town is a long drive from the station through the looming pine forest with its floor of needles and its silence, until finally the narrow track through the woods gives on to a main street. Maybe a mile long, it slopes downward through a series of quaint, country stores before descending toward the glittering ocean, that undulates like a dark blue curtain in the breeze.
 
@@ -323,7 +326,7 @@ You should probably [[ask if he&#39;s there for you|the_cabbie]].</tw-passagedat
 
 [[I take it you&#39;re not from here?|immigrant_cabbie]]
 
-[[Where exactly are we going?|the_mansion]]</tw-passagedata><tw-passagedata pid="3" name="On the train" tags="" position="400,25" size="100,100">You can&#39;t help but doze as the landscape rolls through the window of the train car, like an endless scroll of marshy exurbs with cranes like robots their only inhabitants under gunmetal skies; suburbs demurely hidden from the train tracks by graceful lines of trees; and then everything opens up into fields and lands of unclear purpose: some farms, some plots enclosed with chainlink fences containing some other titanic Machine, puffing and churning away. &quot;What do they do?&quot; you wonder. Whatever it is, they will pursue it until they die.
+[[Where are you supposed to be taking me?|the_mansion]]</tw-passagedata><tw-passagedata pid="3" name="On the train" tags="" position="400,25" size="100,100">You can&#39;t help but doze as the landscape rolls through the window of the train car, like an endless scroll of marshy exurbs with cranes like robots their only inhabitants under gunmetal skies; suburbs demurely hidden from the train tracks by graceful lines of trees; and then everything opens up into fields and lands of unclear purpose: some farms, some plots enclosed with chainlink fences containing some other titanic Machine, puffing and churning away. &quot;What do they do?&quot; you wonder. Whatever it is, they will pursue it until they die.
 
 [[Until...|the_seaside]]</tw-passagedata><tw-passagedata pid="4" name="cabbie_pt_2" tags="" position="575,825" size="100,100">&quot;From, ah, well, you know. I had some debts with some nasty folks and no way to pay &#39;em back that would leave me with all me pieces and parts, you might say. And I rather like me pieces and parts. So I spun the globe and stuck a pin in it and here I am. Next month is nine years.&quot;
 
@@ -366,25 +369,20 @@ You pull the letter from your backpack and read it again.
 
 &quot;Well, I was lookin&#39; for a change, you might say.&quot;
 
-You&#39;ve learned from experience that the less you speak, the more people will open up. It takes waiting through awkward silences, but once mastered, is very effective. 
+You&#39;ve learned during the past two and a half years doing this that you usually get more from people by remaining silent and letting them talk rather than asking too many questions. Awkward to master at first, but very effective.
 
-[[Remain silent.|cabbie_pt_2]]
+[[Remain silent.|cabbie_pt_2]]</tw-passagedata><tw-passagedata pid="8" name="meeting_amanda" tags="" position="575,950" size="100,100"></tw-passagedata><tw-passagedata pid="9" name="stern_talk" tags="" position="575,450" size="100,100">&quot;Excuse me. Please look at me when I&#39;m talking to you,&quot; you say. The cabbie looks up from his newspaper, surprised. &quot;I am the only Benjamin Woodrow-Fisch on earth. The only one. So if you&#39;ve been tasked with driving such a person somewhere, for example by a Ms. Amanda, then you&#39;d best take me. Else you&#39;ll be waiting here &#39;til your eyes fall out, your flesh turns to dust and the knowledge of even so much as your name has passed out of the knowing of any living thing.&quot;
 
-[[Say nothing.|cabbie_pt_2]]</tw-passagedata><tw-passagedata pid="8" name="meeting_amanda" tags="" position="575,950" size="100,100"></tw-passagedata><tw-passagedata pid="9" name="stern_talk" tags="" position="575,450" size="100,100">&quot;Excuse me. Please look at me when I&#39;m talking to you,&quot; you say. The cabbie looks up from his newspaper, surprised. &quot;Myh name is Benjamin Woodrow-Fisch and I&#39;m here at the behest of Ms. Amanda Winthrop. So if you&#39;ve been tasked with driving such a person somewhere, for example by a Ms. Amanda, then you&#39;d best take me. Else you&#39;ll be waiting here &#39;til your eyes fall out, your flesh turns to dust and the knowledge of even so much as your name has passed out of the knowing of any living thing.&quot;
+The cabbie pauses, imagining this with clear horror, then with a toothless smile, reaches back and pops the door open.
 
-The cabbie pauses, then with a toothless smile, reaches back and pops the door open.
+&quot;I was just joshin&#39; ya. Course I knew who you was. Weren&#39;t nobody else on the 3 o&#39;clock, that&#39;s for sure.&quot;
 
-&quot;Why didn&#39;t ye say so in the first place! Just didn&#39;t put the name to the face at first, that&#39;s all. Expected someone a little, you know, older. More of a beard, maybe. But what do I know? Weren&#39;t nobody else on the 3 o&#39;clock, that&#39;s for sure.&quot;
-
-You fall into the back seat, hoping very much that everyone else in this dinky backwater won&#39;t be as impossible as this big oaf. 
-
-&quot;[[Let&#39;s go|Drive on]],&quot; you say. &quot;You&#39;ve already made me late.&quot;</tw-passagedata><tw-passagedata pid="10" name="the_cabbie" tags="" position="575,325" size="100,100">&quot;Reserved,&quot; he says dismissively, when you knock on the window.
+&quot;[[Let&#39;s go|Drive on]],&quot; you say. &quot;You&#39;ve already made me late.&quot;</tw-passagedata><tw-passagedata pid="10" name="the_cabbie" tags="" position="575,325" size="100,100">Cabbie&#39;s crabby. &quot;Reserved,&quot; he says dismissively.
 &quot;For whom?&quot;
-&quot;Like I&#39;d tell you.&quot;
-&quot;Do you know who I am?&quot;
-He gives you a cursory glance.
-&quot;Well I know who you ain&#39;t, that&#39;s for sure.&quot;
-Do you [[drop the &quot;kid affect&quot; and speak to him as a wizard on a mission?|stern_talk]] Or [[start walking into town|hoofing_it]]?</tw-passagedata><tw-passagedata pid="11" name="the_letter_pt_1" tags="" position="400,400" size="100,100">Her name is Amanda O&#39;Shaughnessey, she says, and she is ten years old. She is writing to you without her parents knowing, because they would never let her tell anyone about such a strange and shameful secret.
+&quot;For Benjamin Woodrow-Fisch.&quot;
+&quot;Well, I&#39;m Benjamin Woodrow-Fisch.&quot;
+&quot;Likely story. Buzz off.&quot;
+[[Do you drop the &quot;kid affect&quot; and speak to him as a wizard on a mission?|stern_talk]] Or [[start walking into town|hoofing_it]]?</tw-passagedata><tw-passagedata pid="11" name="the_letter_pt_1" tags="" position="400,400" size="100,100">Her name is Amanda O&#39;Shaughnessey, she says, and she is ten years old. She is writing to you without her parents knowing, because they would never let her tell anyone about such a strange and shameful secret.
 
 &quot;But I&#39;m too scared not to do anything, Benjamin. It&#39;s only getting worse and I can&#39;t imagine where it will end.&quot;
 

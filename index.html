@@ -104,7 +104,7 @@ var LZString=function(){var r=String.fromCharCode,o="ABCDEFGHIJKLMNOPQRSTUVWXYZa
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="The Cliff Wraith" startnode="3" creator="Twine" creator-version="2.11.1" format="SugarCube" format-version="2.37.3" ifid="78C40AB7-F5B9-4B1B-8F6B-82A3E414343D" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200;0,300;0,400;0,700;1,300;1,400&display=swap');
+	<!-- UUID://78C40AB7-F5B9-4B1B-8F6B-82A3E414343D// --><tw-storydata name="The Cliff Wraith" startnode="3" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="78C40AB7-F5B9-4B1B-8F6B-82A3E414343D" zoom="1" format="SugarCube" format-version="2.37.3" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200;0,300;0,400;0,700;1,300;1,400&display=swap');
 
 * { box-sizing: border-box; }
 
@@ -306,6 +306,8 @@ $(document).on(":passagedisplay", function() {
        NOT wrapped in <p> elements. Paragraph breaks are <br><br>.
        We split the raw HTML into blocks and wrap each in a fresh <p>. */
     var html = $passage.html();
+    console.log("=== " + $passage.attr("data-passage") + " ===");
+    console.log("innerHTML:", html);
     var blocks = html.split(/(?:\s*<br\s*\/?>\s*){2,}/gi);
     for (var i = 0; i < blocks.length; i++) {
         var b = blocks[i].trim();
@@ -352,18 +354,25 @@ Kendrick Carnegie. There&#39;s no job title, no cab company. Just a phone number
 
 &quot;Oh, that&#39;s more me personal card,&quot; he says. &quot;Ran out of the cabbie ones. Number&#39;s the same.&quot;
 
+[[Pocket the card|take_card]]
+
+[[Leave it on the seat|leave_card]]</tw-passagedata><tw-passagedata pid="5" name="take_card" tags="" position="575,870" size="100,100">&lt;&lt;set $hasCard to true&gt;&gt;You slip the card into your jacket pocket. Could come in handy.
 
 &quot;And here we are, the grand Castle Mistlethwait!&quot;
 
-You get out of the cab and [[look where he&#39;s pointing|meeting_amanda]].</tw-passagedata><tw-passagedata pid="5" name="coming_to" tags="" position="400,275" size="100,100">As the smell of the sea wafts through the open window, the swirling reverie of the journey snaps into the present tense. You are about to arrive in a town where a young woman awaits, with an urgent request.
+You get out of the cab and [[look where he&#39;s pointing|meeting_amanda]].</tw-passagedata><tw-passagedata pid="6" name="leave_card" tags="" position="650,870" size="100,100">You leave it sitting on the vinyl. Probably just another cabbie.
+
+&quot;And here we are, the grand Castle Mistlethwait!&quot;
+
+You get out of the cab and [[look where he&#39;s pointing|meeting_amanda]].</tw-passagedata><tw-passagedata pid="7" name="coming_to" tags="" position="400,275" size="100,100">As the smell of the sea wafts through the open window, the swirling reverie of the journey snaps into the present tense. You are about to arrive in a town where a young woman awaits, with an urgent request.
 
 You pull the letter from your backpack and read it again.
 
-[[Read the letter.|the_letter_pt_1]]</tw-passagedata><tw-passagedata pid="6" name="hoofing_it" tags="" position="700,325" size="100,100">Before you&#39;ve gotten 400 feet from the train station down the road bulging and warped from weather and civic inattention, the cab pulls up along side you.
+[[Read the letter.|the_letter_pt_1]]</tw-passagedata><tw-passagedata pid="8" name="hoofing_it" tags="" position="700,325" size="100,100">Before you&#39;ve gotten 400 feet from the train station down the road bulging and warped from weather and civic inattention, the cab pulls up along side you.
 
 &quot;Come on, get in,&quot; the cabbie says through the open window. &quot;I was just joshin&#39; ya. Ain&#39;t no other fare within a hundred miles! What kind of businessman would I be if I didn&#39;t take it?&quot;
 
-[[Hop in.|Drive on]]</tw-passagedata><tw-passagedata pid="7" name="immigrant_cabbie" tags="" position="575,700" size="100,100">&quot;Me? No. I&#39;m from Edinburgh.&quot;
+[[Hop in.|Drive on]]</tw-passagedata><tw-passagedata pid="9" name="immigrant_cabbie" tags="" position="575,700" size="100,100">&quot;Me? No. I&#39;m from Edinburgh.&quot;
 
 &quot;What brings you to place like this?&quot;
 
@@ -371,30 +380,30 @@ You pull the letter from your backpack and read it again.
 
 You&#39;ve learned during the past two and a half years doing this that you usually get more from people by remaining silent and letting them talk rather than asking too many questions. Awkward to master at first, but very effective.
 
-[[Remain silent.|cabbie_pt_2]]</tw-passagedata><tw-passagedata pid="8" name="meeting_amanda" tags="" position="575,950" size="100,100"></tw-passagedata><tw-passagedata pid="9" name="stern_talk" tags="" position="575,450" size="100,100">&quot;Excuse me. Please look at me when I&#39;m talking to you,&quot; you say. The cabbie looks up from his newspaper, surprised. &quot;I am the only Benjamin Woodrow-Fisch on earth. The only one. So if you&#39;ve been tasked with driving such a person somewhere, for example by a Ms. Amanda, then you&#39;d best take me. Else you&#39;ll be waiting here &#39;til your eyes fall out, your flesh turns to dust and the knowledge of even so much as your name has passed out of the knowing of any living thing.&quot;
+[[Remain silent.|cabbie_pt_2]]</tw-passagedata><tw-passagedata pid="10" name="meeting_amanda" tags="" position="575,950" size="100,100">&lt;&lt;if $hasCard&gt;&gt;You pat your pocket — Kendrick&#39;s card is still there. Good. Something tells you you&#39;ll need it.&lt;&lt;else&gt;&gt;You wish you&#39;d taken that cabbie&#39;s card. Too late now.&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="stern_talk" tags="" position="575,450" size="100,100">&quot;Excuse me. Please look at me when I&#39;m talking to you,&quot; you say. The cabbie looks up from his newspaper, surprised. &quot;I am the only Benjamin Woodrow-Fisch on earth. The only one. So if you&#39;ve been tasked with driving such a person somewhere, for example by a Ms. Amanda, then you&#39;d best take me. Else you&#39;ll be waiting here &#39;til your eyes fall out, your flesh turns to dust and the knowledge of even so much as your name has passed out of the knowing of any living thing.&quot;
 
 The cabbie pauses, imagining this with clear horror, then with a toothless smile, reaches back and pops the door open.
 
 &quot;I was just joshin&#39; ya. Course I knew who you was. Weren&#39;t nobody else on the 3 o&#39;clock, that&#39;s for sure.&quot;
 
-&quot;[[Let&#39;s go|Drive on]],&quot; you say. &quot;You&#39;ve already made me late.&quot;</tw-passagedata><tw-passagedata pid="10" name="the_cabbie" tags="" position="575,325" size="100,100">Cabbie&#39;s crabby. &quot;Reserved,&quot; he says dismissively.
+&quot;[[Let&#39;s go|Drive on]],&quot; you say. &quot;You&#39;ve already made me late.&quot;</tw-passagedata><tw-passagedata pid="12" name="the_cabbie" tags="" position="575,325" size="100,100">Cabbie&#39;s crabby. &quot;Reserved,&quot; he says dismissively.
 &quot;For whom?&quot;
 &quot;For Benjamin Woodrow-Fisch.&quot;
 &quot;Well, I&#39;m Benjamin Woodrow-Fisch.&quot;
 &quot;Likely story. Buzz off.&quot;
-[[Do you drop the &quot;kid affect&quot; and speak to him as a wizard on a mission?|stern_talk]] Or [[start walking into town|hoofing_it]]?</tw-passagedata><tw-passagedata pid="11" name="the_letter_pt_1" tags="" position="400,400" size="100,100">Her name is Amanda O&#39;Shaughnessey, she says, and she is ten years old. She is writing to you without her parents knowing, because they would never let her tell anyone about such a strange and shameful secret.
+[[Do you drop the &quot;kid affect&quot; and speak to him as a wizard on a mission?|stern_talk]] Or [[start walking into town|hoofing_it]]?</tw-passagedata><tw-passagedata pid="13" name="the_letter_pt_1" tags="" position="400,400" size="100,100">Her name is Amanda O&#39;Shaughnessey, she says, and she is ten years old. She is writing to you without her parents knowing, because they would never let her tell anyone about such a strange and shameful secret.
 
 &quot;But I&#39;m too scared not to do anything, Benjamin. It&#39;s only getting worse and I can&#39;t imagine where it will end.&quot;
 
-[[Read on.|the_letter_pt_2]]</tw-passagedata><tw-passagedata pid="12" name="the_letter_pt_2" tags="" position="400,525" size="100,100">&quot;Here it is, then. In our town of Middlethwaite there have long been legends and tales about a mysterious being called &#39;The Cliff Wraith.&#39; On nights where the moon is shining, it is seen walking the tops of the highest cliffs, screeching and keening and making the most awful sounds. And anyone who goes to learn more... well, they never come back.&quot;
+[[Read on.|the_letter_pt_2]]</tw-passagedata><tw-passagedata pid="14" name="the_letter_pt_2" tags="" position="400,525" size="100,100">&quot;Here it is, then. In our town of Middlethwaite there have long been legends and tales about a mysterious being called &#39;The Cliff Wraith.&#39; On nights where the moon is shining, it is seen walking the tops of the highest cliffs, screeching and keening and making the most awful sounds. And anyone who goes to learn more... well, they never come back.&quot;
 
-[[Read on.|the_letter_pt_3]]</tw-passagedata><tw-passagedata pid="13" name="the_letter_pt_3" tags="" position="400,650" size="100,100">&quot;But here&#39;s the thing: my dad has started sleepwalking. And going toward the Wraith when she appears. So far, we&#39;ve caught him before he could reach the cliffs, but I&#39;m so afraid, Benjamin: what if one time we don&#39;t wake up in time and he finds the Wraith in his sleep. Oh, I can&#39;t even think of it! It is too, too horrible.
+[[Read on.|the_letter_pt_3]]</tw-passagedata><tw-passagedata pid="15" name="the_letter_pt_3" tags="" position="400,650" size="100,100">&quot;But here&#39;s the thing: my dad has started sleepwalking. And going toward the Wraith when she appears. So far, we&#39;ve caught him before he could reach the cliffs, but I&#39;m so afraid, Benjamin: what if one time we don&#39;t wake up in time and he finds the Wraith in his sleep. Oh, I can&#39;t even think of it! It is too, too horrible.
 
 &quot;We&#39;ve tried tying him up with rope. Even with heavy weights attached. We&#39;ve tried waiting watch for the moment when he departs. But somehow, he manages to shrug the bonds and escape no matter what we do.
 
 &quot;My mother would never admit such a thing, but to me it&#39;s clear there&#39;s magic involved. Or witchcraft. Or sorcery. Oh, I don&#39;t know the difference! But you do, I think.&quot;
 
-[[Read on.|the_letter_pt_4]]</tw-passagedata><tw-passagedata pid="14" name="the_letter_pt_4" tags="" position="400,775" size="100,100">&quot;Which is why I&#39;m writing. Please come on the 3pm on Friday from Penn Station on the Highland Line, all the way to the last stop, and I shall be waiting for you then.
+[[Read on.|the_letter_pt_4]]</tw-passagedata><tw-passagedata pid="16" name="the_letter_pt_4" tags="" position="400,775" size="100,100">&quot;Which is why I&#39;m writing. Please come on the 3pm on Friday from Penn Station on the Highland Line, all the way to the last stop, and I shall be waiting for you then.
 
 &quot;Please say nothing to anyone! I fear any disclosure may add risk for my father, who already flirts nightly with annihilation.
 
@@ -404,7 +413,7 @@ The cabbie pauses, imagining this with clear horror, then with a toothless smile
 
 &quot;Amanda.&quot;
 
-[[Fold the letter and look up. You&#39;ve arrived.|Arriving at the station]]</tw-passagedata><tw-passagedata pid="15" name="the_mansion" tags="" position="700,700" size="100,100"></tw-passagedata><tw-passagedata pid="16" name="the_seaside" tags="" position="400,150" size="100,100">Until finally, the pressure of the suffocating land lifts and the sky seems to rise and scrub grass and pines replace the empty flatness and suddenly, there it is: a slice of blue, blessed blue. It disappears as the train takes a turn, but you saw it — you really did — the wise, old sea. You have accumulated such a sack of questions and woes since last you saw her, but somehow she will hold them all, you know. Somehow she always has.
+[[Fold the letter and look up. You&#39;ve arrived.|Arriving at the station]]</tw-passagedata><tw-passagedata pid="17" name="the_mansion" tags="" position="700,700" size="100,100"></tw-passagedata><tw-passagedata pid="18" name="the_seaside" tags="" position="400,150" size="100,100">Until finally, the pressure of the suffocating land lifts and the sky seems to rise and scrub grass and pines replace the empty flatness and suddenly, there it is: a slice of blue, blessed blue. It disappears as the train takes a turn, but you saw it — you really did — the wise, old sea. You have accumulated such a sack of questions and woes since last you saw her, but somehow she will hold them all, you know. Somehow she always has.
 
 [[You&#39;re almost there.|coming_to]]</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">

@@ -183,7 +183,12 @@ p.prose a {
 }
 p.prose a:hover {
   text-decoration: underline;
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript">var lastFadeTime = 0;
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript">/* Clear SugarCube's session state so browser refresh always starts fresh */
+if (typeof sessionStorage !== "undefined") { sessionStorage.clear(); }
+Config.saves.maxAutoSaves = 0;
+Config.saves.maxSlotSaves = 0;
+
+var lastFadeTime = 0;
 
 function inkyFadeIn($el) {
     var minimumTimeSeparation = 200;
@@ -306,8 +311,6 @@ $(document).on(":passagedisplay", function() {
        NOT wrapped in <p> elements. Paragraph breaks are <br><br>.
        We split the raw HTML into blocks and wrap each in a fresh <p>. */
     var html = $passage.html();
-    console.log("=== " + $passage.attr("data-passage") + " ===");
-    console.log("innerHTML:", html);
     var blocks = html.split(/(?:\s*<br\s*\/?>\s*){2,}/gi);
     for (var i = 0; i < blocks.length; i++) {
         var b = blocks[i].trim();
